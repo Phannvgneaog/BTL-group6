@@ -1,0 +1,190 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th10 28, 2024 lúc 04:59 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.1.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Cơ sở dữ liệu: `baitap`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `admin`
+--
+
+CREATE TABLE `admin` (
+  `username` varchar(50) NOT NULL,
+  `password` varchar(30) DEFAULT NULL,
+  `numberphone` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`, `numberphone`) VALUES
+('admin', 'admin@123', '0389768605');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `ct_id` varchar(10) NOT NULL,
+  `ct_name` varchar(50) NOT NULL,
+  `ct_email` varchar(100) NOT NULL,
+  `ct_numberphone` varchar(15) NOT NULL,
+  `ct_problem` varchar(150) NOT NULL,
+  `ct_detail` text NOT NULL,
+  `ct_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contacts`
+--
+
+INSERT INTO `contacts` (`ct_id`, `ct_name`, `ct_email`, `ct_numberphone`, `ct_problem`, `ct_detail`, `ct_time`) VALUES
+('oBy9B', 'Phan Xuân Tuấn', 'tuandong600@gmail', '0967851017', 'sản phẩm cửa hàng', 'khá ổn', '2023-12-25 08:35:07');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` varchar(11) NOT NULL,
+  `oder_username` varchar(100) NOT NULL,
+  `oder_prd` varchar(150) NOT NULL,
+  `oder_quantity` int(11) NOT NULL,
+  `type_pay` varchar(150) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `order_status` varchar(150) NOT NULL,
+  `order_total` varchar(15) DEFAULT NULL,
+  `order_address` varchar(250) DEFAULT NULL,
+  `Image_bank` varchar(200) NOT NULL,
+  `ghi_chu` varchar(150) NOT NULL,
+  `trang_thai` varchar(150) NOT NULL DEFAULT 'Đơn mới'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `oder_username`, `oder_prd`, `oder_quantity`, `type_pay`, `order_date`, `order_status`, `order_total`, `order_address`, `Image_bank`, `ghi_chu`, `trang_thai`) VALUES
+('Va6Jq', 'phantuan', 'áo thun', 15, 'Thanh toán khi nhận hàng', '2024-01-06 01:13:29', '', '6000000', 'phan xuân tuấn, 0389768605, đường cổ nhuế , bắc từ liêm ,hà nội', '', 'Thanh toán 100% khi nhận hàng', 'Đã Hủy'),
+('vQTIF', 'Tuanpr', 'quần jean', 1, 'Thanh toán khi nhận hàng', '2023-12-25 10:22:03', '', '50,000.00', 'phan xuân tuấn , 0389768605, đường cổ nhuế , bắc từ liêm hà nội ', '', '', 'Đơn mới');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `products`
+--
+
+CREATE TABLE `products` (
+  `prd_id` varchar(15) NOT NULL,
+  `prd_name` varchar(150) NOT NULL,
+  `prd_detail` text NOT NULL,
+  `prd_price` decimal(15,2) NOT NULL,
+  `prd_quantity` int(11) NOT NULL,
+  `prd_img` varchar(200) DEFAULT NULL,
+  `prd_category` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`prd_id`, `prd_name`, `prd_detail`, `prd_price`, `prd_quantity`, `prd_img`, `prd_category`) VALUES
+('DA06', 'áo thun', 'áo thun', 300000.00, 109, 'áo thun.jpg', 'Đồ áo'),
+('DU01', 'quần jean', 'quần jean', 15000.00, 17, 'quan jean.jpg', 'Đồ áo'),
+('TM06', 'áo khoác', 'áo khoác ', 15000.00, 20, 'áo khoác .jpg', 'ao khoac');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `username` varchar(100) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `numberphone` varchar(15) NOT NULL,
+  `address` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`username`, `password`, `numberphone`, `address`) VALUES
+('Tuanpr0123', '2042003K', '0389768605', 'phan xuân tuấn, 0866539033, Thôn quyền ,ngọc sơn hiệp hòa ,bắc giang'),
+('phantuan', '2042003K', '0389768605', 'phan xuân tuấn, 0389768605, cổ nhuế , bắc từ liêm ,hà nội');
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Chỉ mục cho bảng `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`ct_id`);
+
+--
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `oder_username` (`oder_username`),
+  ADD KEY `product_id` (`oder_prd`);
+
+--
+-- Chỉ mục cho bảng `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`prd_id`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`oder_username`) REFERENCES `users` (`username`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
